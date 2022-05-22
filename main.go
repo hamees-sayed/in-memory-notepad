@@ -42,6 +42,7 @@ func exitProgram() {
 
 func readNoteList(notes []string) {
 	if len(notes) == 0 {
+		fmt.Println("[Info] Notepad is empty")
 		return
 	}
 
@@ -55,9 +56,15 @@ func readNoteList(notes []string) {
 }
 
 func addNote(note string, notes *[]string, noteLength int) {
+	newNote := strings.TrimSpace(note)
+
 	if len(*notes) >= noteLength {
 		fmt.Println("[Error] Notepad is full")
 	} else {
+		if newNote == "" {
+			fmt.Println("[Error] Missing note argument")
+			return
+		}
 		*notes = append(*notes, note)
 		fmt.Println("[OK] The note was successfully created")
 	}
